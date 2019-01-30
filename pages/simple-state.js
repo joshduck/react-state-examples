@@ -4,28 +4,20 @@ export default class extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 0,
-      isOdd: false
+      clicked: false
     };
   }
 
   onClickButton() {
-    // Subtle bug, might be incorrectly counting
     this.setState({
-      count: this.state.count + 1
-    });
-
-    // Whoops, remember that state isn't updated synchronously
-    this.setState({
-      isOdd: this.state.count % 2
+      clicked: true
     });
   }
 
   render() {
     return (
       <div>
-        {this.state.count} clicks! (an {this.state.isOdd ? "odd" : "even"}{" "}
-        number!)
+        {this.state.clicked ? "Noooooooo!" : "Don't click the button, please."}
         <br />
         <button onClick={() => this.onClickButton()}>Click me</button>
       </div>

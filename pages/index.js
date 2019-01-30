@@ -4,10 +4,13 @@ import Link from "next/link";
 export default () => (
   <ul>
     <li>
-      <Link href="/component-local-state">Using setState().</Link>
+      <Link href="/simple-state">Simple setState().</Link>
     </li>
     <li>
-      <Link href="/complex-interactions">Components with complex state.</Link>
+      <Link href="/simple-buggy-state">Pitfalls of setState().</Link>
+    </li>
+    <li>
+      <Link href="/complex-interactions">Modelling complex state.</Link>
     </li>
     <li>
       <Link href="/complex-interactions-with-store">Using a store.</Link>

@@ -36,12 +36,21 @@ function reduceState(state = { selected: 0, collapsed: false }, action = {}) {
   }
 }
 
-// { type: 'up'},
-// { type: 'down'},
-// { type: 'select', index: 2 },
-// { type: 'down'},
-// { type: 'down'},
-// { type: 'up'},
+console.log(
+  [
+    { type: "up" },
+    { type: "down" },
+    { type: "select", index: 2 },
+    { type: "down" },
+    { type: "down" },
+    { type: "down" },
+    { type: "down" },
+    { type: "down" },
+    { type: "down" },
+    { type: "down" },
+    { type: "up" }
+  ].reduce(reduceState, { selected: 0, collapsed: false })
+);
 
 export default class extends React.Component {
   constructor(props) {
@@ -50,7 +59,10 @@ export default class extends React.Component {
   }
 
   dispatch(action) {
-    this.setState(oldState => reduceState(oldState, action));
+    this.setState(prevState => {
+      const newState = reduceState(prevState, action);
+      return newState;
+    });
   }
 
   onKeyPress(e) {

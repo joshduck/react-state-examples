@@ -60,6 +60,31 @@ function select(index) {
   return { type: "select", index };
 }
 
+// Get props for component based on Redux store state.
+const mapStateToProps = state => {
+  return {
+    selected: state.selected,
+    collapsed: state.collapsed
+  };
+};
+
+// Get props for component for dispatching actions.
+const mapDispatchToProps = dispatch => ({
+  // doSomething: (arg1) => dispatch({ type: 'do-somethign', id: arg1 })
+
+  // Shorthand version, using pre-defined action creator functions.
+  ...bindActionCreators(
+    {
+      moveUp,
+      moveDown,
+      close,
+      toggle,
+      select
+    },
+    dispatch
+  )
+});
+
 // Page can use actions bound (later on)
 class Page extends React.Component {
   onKeyPress(e) {
@@ -122,38 +147,13 @@ class Page extends React.Component {
   }
 }
 
-const store = createStore(reduceState);
-
-// Get props for component based on Redux store state.
-const mapStateToProps = state => {
-  return {
-    selected: state.selected,
-    collapsed: state.collapsed
-  };
-};
-
-// Get props for component for dispatching actions.
-const mapDispatchToProps = dispatch => ({
-  // doSomething: (arg1) => dispatch({ type: 'do-somethign', id: arg1 })
-
-  // Shorthand version, using pre-defined action creators.
-  ...bindActionCreators(
-    {
-      moveUp,
-      moveDown,
-      close,
-      toggle,
-      select
-    },
-    dispatch
-  )
-});
-
 const ConnectedPage = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Page);
 
+// Define and app-level store and Redux context
+const store = createStore(reduceState);
 export default function() {
   return (
     <Provider store={store}>

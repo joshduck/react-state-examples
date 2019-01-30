@@ -20,8 +20,7 @@ export default class extends React.Component {
     } else if (e.keyCode === 40 /* Down */) {
       if (this.state.collapsed) {
         this.setState({ collapsed: false, selected: 0 });
-      }
-      if (this.state.selected < 2) {
+      } else if (this.state.selected < 2) {
         this.setState({ selected: this.state.selected + 1 });
       }
     } else if (e.keyCode === 27 /* Escape */) {
